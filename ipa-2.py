@@ -37,7 +37,7 @@ def shift_letter(letter, shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-     if letter == " ":
+    if letter == " ":
         return " "
         
     mystring = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
@@ -155,7 +155,7 @@ def vigenere_cipher(message, key):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-        shifted_messagelist = []
+    shifted_messagelist = []
     key_index = 0
     for char in message:
             current_index = ord(char) - ord("A")
