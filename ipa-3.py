@@ -41,8 +41,17 @@ def relationship_status(from_member, to_member, social_graph):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
-
+    if from_member in social_graph:
+        if to_member in social_graph[from_member]["following"]:
+            if not from_member in social_graph[to_member]["following"]:
+                return "follower"
+            elif from_member in social_graph[to_member]["following"]:
+                return "friends"
+        if not to_member in social_graph[from_member]["following"]:
+            if from_member in social_graph[to_member]["following"]:
+                return "followed by"
+            elif not from_member in social_graph[to_member]["following"]:
+                return "no relationship"
 
 def tic_tac_toe(board):
     '''Tic Tac Toe.
@@ -70,7 +79,33 @@ def tic_tac_toe(board):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    for i in range(len(board)):
+
+        if all(value == 'X' for value in board[i]):
+             return 'X'
+        elif all(value == 'O' for value in board[i]):
+             return 'O'
+
+        if all(row[i] == 'X' for row in board):
+             return 'X'
+        elif all(row[i] == 'O' for row in board):
+             return 'O'
+    
+
+    diagonal1 = [board[i][i] for i in range(len(board))]
+    if all(value == 'X' for value in diagonal1):
+        return 'X'
+    elif all(value == 'O' for value in diagonal1):
+        return 'O'
+
+    diagonal2 = [board[i][len(board) - i - 1] for i in range(len(board))] #used chat gpt here to get the diagonal from right to left
+    if all(value == 'X' for value in diagonal2):
+        return 'X'
+    elif all(value == 'O' for value in diagonal2):
+        return 'O'
+    
+    else: 
+        return 'NO WINNER'
 
 def eta(first_stop, second_stop, route_map):
     '''ETA.
@@ -103,4 +138,16 @@ def eta(first_stop, second_stop, route_map):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    if first_stop == second_stop:
+        return 0
+    
+    travel_time = 0
+    current_stop = first_stop
+    while current_stop != second_stop:
+        for key in route_map.keys():
+            if current_stop == key[0]:
+                travel_time += route_map[key]["travel_time_mins"]
+                current_stop = key[1] 
+                break
+    
+    return travel_time
